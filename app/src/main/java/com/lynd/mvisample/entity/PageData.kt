@@ -1,9 +1,14 @@
 package com.lynd.mvisample.entity
 
 data class PageData<T>(
-    val count: Int,
-    val start: Int,
-    val subjects: List<T>,
-    val title: String,
-    val total: Int
+	val dates: TIMDBDate,
+	val page: Int,
+	val results: List<MovieData>,
+	val total_pages: Int,
+	val total_results: Int,
+)
+
+data class TIMDBDate(
+	val maximum: String,
+	val minimum: String
 )

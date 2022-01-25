@@ -1,9 +1,11 @@
 package com.lynd.mvisample.constants
 
-const val DOMAIN = "https://movie.douban.com"
+const val DOMAIN = "https://api.themoviedb.org/"
 
-const val API_LEVEL = "/j"
+const val API_LEVEL = "/3"
 
-const val API_KEY = "0b2bdeda43b5688921839c8ecb20399b"
+const val API_KEY = "96c4116c983c6455201491dcec1060d2"
 
-const val IN_THEATERS_PATH = "/search_subjects"
+const val NOW_PLAYING = "/movie/now_playing"
+
+const val IMAGE_DOMAIN = "https://www.themoviedb.org/t/p/w220_and_h330_face"

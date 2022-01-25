@@ -10,33 +10,35 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetClient private constructor() {
 
-    private val okhttp: OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor {
-            val req = it.request()
-            val urlBuilder = req.url.newBuilder()
-            urlBuilder.addQueryParameter("apikey", API_KEY)
-            val newReq = Request.Builder().url(urlBuilder.build()).build()
-            it.proceed(newReq)
-        }
-        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        .build()
+	private val okhttp: OkHttpClient = OkHttpClient.Builder()
+		.addInterceptor {
+			val req = it.request()
+			val urlBuilder = req.url.newBuilder()
+			urlBuilder.addQueryParameter("api_key", API_KEY)
+			val newReq = Request.Builder().url(urlBuilder.build()).build()
+			it.proceed(newReq)
+		}
+		.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+		.build()
 
-    companion object {
-        private var client: NetClient? = null
+	private val retrofit = Retrofit.Builder()
+		.client(okhttp)
+		.baseUrl(DOMAIN)
+		.addConverterFactory(GsonConverterFactory.create())
+		.build()
 
-        @Synchronized
-        fun getInstance(): NetClient {
-            if (client == null) {
-                client = NetClient()
-            }
-            return client!!
-        }
-    }
+	companion object {
+		private var client: NetClient? = null
 
-    fun getDouBanService(): DouBanService =
-        Retrofit.Builder()
-            .client(okhttp)
-            .baseUrl(DOMAIN)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build().create(DouBanService::class.java)
+		@Synchronized
+		fun getInstance(): NetClient {
+			if (client == null) {
+				client = NetClient()
+			}
+			return client!!
+		}
+	}
+
+	fun getMovieService(): TMDBMovieService =
+      retrofit.create(TMDBMovieService::class.java)
 }

@@ -1,13 +1,18 @@
 package com.lynd.mvisample.entity
 
 data class MovieData(
-    val cover: String,
-    val cover_x: Int,
-    val cover_y: Int,
-    val id: String,
-    val is_new: Boolean,
-    val playable: Boolean,
-    val rate: String,
-    val title: String,
-    val url: String
+	val adult: Boolean,
+	val backdrop_path: String,
+	val genre_ids: List<Int>,
+	val id: Int,
+	val original_language: String,
+	val original_title: String,
+	val overview: String,
+	val popularity: Double,
+	val poster_path: String,
+	val release_date: String,
+	val title: String,
+	val video: Boolean,
+	val vote_average: Double,
+	val vote_count: Int
 )
